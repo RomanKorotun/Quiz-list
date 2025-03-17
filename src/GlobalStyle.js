@@ -14,7 +14,6 @@ ul, ol {
 }
 
 a {
-    text-decoration: none;
     color:#000000;
 }
 `;

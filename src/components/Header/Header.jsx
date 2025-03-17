@@ -7,8 +7,8 @@ export const Header = () => {
     <HeaderSection>
       <Container>
         <Nav>
-          <NavLink to="/catalog">Quiz_Catalog</NavLink>
-          <NavLink to="/create">Create_Quiz</NavLink>
+          <NavLink to="/quizzes">Quizzes</NavLink>
+          <NavLink to="/create-quiz">Create_Quiz</NavLink>
         </Nav>
       </Container>
     </HeaderSection>

@@ -15,8 +15,12 @@ import { QuestionInput } from "../Inputs/QuestionInput/QuestionInput";
 import { TypeInput } from "../Inputs/TypeInput/TypeInput";
 import { ChoiceInput } from "../Inputs/ChoiceInput/ChoiceInput";
 import { CreateQuizSchema } from "../../validation/quizzes/createQuizValidation";
+import { addQuiz } from "../../api/quiz";
+import { useNavigate } from "react-router-dom";
 
 export const CreateQuizForm = () => {
+  const navigate = useNavigate();
+
   const handleTypeChange = (e, questionIndex, setFieldValue, setFieldError) => {
     const newType = e.target.value;
     const question = `questions[${questionIndex}].question`;
@@ -59,6 +63,23 @@ export const CreateQuizForm = () => {
     arrayHelpers.push({ question: "", type: "Text", answers: [] });
   };
 
+  const onSubmit = async (values) => {
+    try {
+      await addQuiz(values);
+
+      navigate("/create-quiz-result", {
+        state: { success: true, message: "Quiz created successfully!" },
+      });
+    } catch {
+      navigate("/create-quiz-result", {
+        state: {
+          error: true,
+          message: "An error occurred while creating the quiz.",
+        },
+      });
+    }
+  };
+
   return (
     <Formik
       initialValues={{
@@ -68,9 +89,7 @@ export const CreateQuizForm = () => {
       }}
       validationSchema={CreateQuizSchema}
       validateOnChange={false}
-      onSubmit={(values) => {
-        console.log(values);
-      }}
+      onSubmit={async (values) => onSubmit(values)}
     >
       {({ values, setFieldValue, errors, setFieldError }) => (
         <Form>
