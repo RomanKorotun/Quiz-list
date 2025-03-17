@@ -9,9 +9,21 @@ import {
   Questions,
 } from "./QuizCard.styled";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const QuizCard = ({ quiz, quizDelete }) => {
   const [isOptionsVisible, setIsOptionsVisible] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleClickUpdate = () => {
+    navigate(`/update-quiz/${quiz._id}`);
+  };
+
+  const handleClickDelete = (id) => {
+    quizDelete(id);
+    setIsOptionsVisible((prevState) => !prevState);
+  };
 
   return (
     <CardWrapper>
@@ -26,15 +38,8 @@ export const QuizCard = ({ quiz, quizDelete }) => {
       {isOptionsVisible && (
         <OptionsList>
           <Option>Run</Option>
-          <Option>Edit</Option>
-          <Option
-            onClick={() => {
-              quizDelete(quiz._id);
-              setIsOptionsVisible((prevState) => !prevState);
-            }}
-          >
-            Delete
-          </Option>
+          <Option onClick={handleClickUpdate}>Edit</Option>
+          <Option onClick={() => handleClickDelete(quiz._id)}>Delete</Option>
         </OptionsList>
       )}
     </CardWrapper>

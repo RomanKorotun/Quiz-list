@@ -3,12 +3,12 @@ import { Container, Section } from "../GlobalStyle";
 import { deleteQuiz, getAllQuizzes } from "../api/quiz";
 import { QuizList } from "../components/QuizList/QuizList";
 import { Link } from "react-router-dom";
+import { TitlePage } from "../components/common/TitlePage";
 
-const Quizzes = () => {
+const QuizzesPage = () => {
   const [quizList, setQuizList] = useState(null);
 
   const quizDelete = async (id) => {
-    console.log(id);
     try {
       const { data: deletedQuiz } = await deleteQuiz(id);
       setQuizList((prevState) =>
@@ -34,6 +34,7 @@ const Quizzes = () => {
   return (
     <Section>
       <Container>
+        <TitlePage>Update Quiz</TitlePage>
         {quizList?.length > 0 && (
           <QuizList quizList={quizList} quizDelete={quizDelete} />
         )}
@@ -48,4 +49,4 @@ const Quizzes = () => {
   );
 };
 
-export default Quizzes;
+export default QuizzesPage;

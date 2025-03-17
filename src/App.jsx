@@ -2,17 +2,19 @@ import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout";
 
-const Quizzes = lazy(() => import("./pages/Quizzes"));
-const CreateQuiz = lazy(() => import("./pages/CreateQuiz"));
-const CreateQuizResult = lazy(() => import("./pages/CreateQuizResult"));
+const QuizzesPage = lazy(() => import("./pages/QuizzesPage"));
+const CreateQuizPage = lazy(() => import("./pages/CreateQuizPage"));
+const CreateQuizResultPage = lazy(() => import("./pages/CreateQuizResultPage"));
+const UpdateQuizPage = lazy(() => import("./pages/UpdateQuizPage"));
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="quizzes" element={<Quizzes />} />
-        <Route path="create-quiz" element={<CreateQuiz />} />
-        <Route path="create-quiz-result" element={<CreateQuizResult />} />
+        <Route path="quizzes" element={<QuizzesPage />} />
+        <Route path="create-quiz" element={<CreateQuizPage />} />
+        <Route path="create-quiz-result" element={<CreateQuizResultPage />} />
+        <Route path="update-quiz/:id" element={<UpdateQuizPage />} />
       </Route>
     </Routes>
   );

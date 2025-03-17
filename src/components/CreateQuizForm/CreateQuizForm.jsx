@@ -15,10 +15,10 @@ import { QuestionInput } from "../Inputs/QuestionInput/QuestionInput";
 import { TypeInput } from "../Inputs/TypeInput/TypeInput";
 import { ChoiceInput } from "../Inputs/ChoiceInput/ChoiceInput";
 import { CreateQuizSchema } from "../../validation/quizzes/createQuizValidation";
-import { addQuiz } from "../../api/quiz";
+import { addQuiz, updateQuiz } from "../../api/quiz";
 import { useNavigate } from "react-router-dom";
 
-export const CreateQuizForm = () => {
+export const CreateQuizForm = ({ quiz }) => {
   const navigate = useNavigate();
 
   const handleTypeChange = (e, questionIndex, setFieldValue, setFieldError) => {
@@ -64,31 +64,54 @@ export const CreateQuizForm = () => {
   };
 
   const onSubmit = async (values) => {
-    try {
-      await addQuiz(values);
+    if (!quiz) {
+      try {
+        await addQuiz(values);
 
-      navigate("/create-quiz-result", {
-        state: { success: true, message: "Quiz created successfully!" },
-      });
-    } catch {
-      navigate("/create-quiz-result", {
-        state: {
-          error: true,
-          message: "An error occurred while creating the quiz.",
-        },
-      });
+        navigate("/create-quiz-result", {
+          state: { success: true, message: "Quiz created successfully!" },
+        });
+      } catch {
+        navigate("/create-quiz-result", {
+          state: {
+            error: true,
+            message: "An error occurred while creating the quiz.",
+          },
+        });
+      }
+    } else {
+      const response = await updateQuiz(quiz._id, values);
+      if (response) {
+        navigate("/quizzes");
+      }
     }
+  };
+
+  const newQuiz = quiz;
+  if (newQuiz) {
+    newQuiz.questions.forEach((question) => {
+      delete question._id;
+    });
+  }
+
+  const initialValues = {
+    name: newQuiz?.name || "",
+    description: newQuiz?.description || "",
+    questions: newQuiz?.questions || [
+      {
+        question: "",
+        type: "Text",
+        answers: [],
+      },
+    ],
   };
 
   return (
     <Formik
-      initialValues={{
-        name: "",
-        description: "",
-        questions: [{ question: "", type: "Text", answers: [] }],
-      }}
+      initialValues={initialValues}
       validationSchema={CreateQuizSchema}
       validateOnChange={false}
+      enableReinitialize={true}
       onSubmit={async (values) => onSubmit(values)}
     >
       {({ values, setFieldValue, errors, setFieldError }) => (
@@ -115,12 +138,12 @@ export const CreateQuizForm = () => {
             name="questions"
             render={(arrayHelpers) => (
               <>
-                {values.questions.map((question, questionIndex) => (
+                {values.questions.map((questionItem, questionIndex) => (
                   <QuestionGroup key={questionIndex}>
                     <Wrapper>
                       <QuestionInput
                         questionIndex={questionIndex}
-                        question={question.name}
+                        question={questionItem.question}
                         handleQuestionChange={(e) => {
                           const question = `questions[${questionIndex}].question`;
                           setFieldValue(question, e.target.value);
@@ -131,7 +154,7 @@ export const CreateQuizForm = () => {
 
                       <TypeInput
                         questionIndex={questionIndex}
-                        type={question.type}
+                        type={questionItem.type}
                         handleTypeChange={(e) => {
                           handleTypeChange(
                             e,
@@ -154,13 +177,13 @@ export const CreateQuizForm = () => {
                       </RemoveButton>
                     </Wrapper>
 
-                    {(question.type === "Single choice" ||
-                      question.type === "Multiple choices") && (
+                    {(questionItem.type === "Single choice" ||
+                      questionItem.type === "Multiple choices") && (
                       <AnswersGroup>
-                        {question.answers.length > 0 && (
+                        {questionItem.answers.length > 0 && (
                           <TitleAnswers> Answers</TitleAnswers>
                         )}
-                        {question.answers.map((answer, answerIndex) => (
+                        {questionItem.answers.map((answer, answerIndex) => (
                           <ChoiceWrapper
                             key={`${questionIndex}-${answerIndex}`}
                           >
@@ -184,7 +207,7 @@ export const CreateQuizForm = () => {
                               type="button"
                               onClick={() =>
                                 handleAnswerRemove(
-                                  question,
+                                  questionItem,
                                   questionIndex,
                                   answerIndex,
                                   setFieldValue
@@ -200,7 +223,7 @@ export const CreateQuizForm = () => {
                           type="button"
                           onClick={() =>
                             handleChoiceAdd(
-                              question,
+                              questionItem,
                               questionIndex,
                               setFieldValue
                             )
@@ -223,7 +246,9 @@ export const CreateQuizForm = () => {
             )}
           />
 
-          <SubmitButton type="submit">Create Quiz</SubmitButton>
+          <SubmitButton type="submit">
+            {!quiz ? "Create Quiz" : "Update Quiz"}
+          </SubmitButton>
         </Form>
       )}
     </Formik>

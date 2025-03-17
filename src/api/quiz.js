@@ -1,15 +1,23 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:6060";
+axios.defaults.baseURL = "http://localhost:6060/api";
 
-export const addQuiz = async (data) => {
-  return await axios.post("/api/quizzes", data);
+export const addQuiz = async (quiz) => {
+  return await axios.post("/quizzes", quiz);
 };
 
 export const getAllQuizzes = async () => {
-  return await axios.get("/api/quizzes");
+  return await axios.get("/quizzes");
+};
+
+export const getByIdQuiz = async (id) => {
+  return await axios.get(`/quizzes/${id}`);
 };
 
 export const deleteQuiz = async (id) => {
-  return await axios.delete(`/api/quizzes/${id}`);
+  return await axios.delete(`/quizzes/${id}`);
+};
+
+export const updateQuiz = async (id, quiz) => {
+  return await axios.put(`/quizzes/${id}`, quiz);
 };

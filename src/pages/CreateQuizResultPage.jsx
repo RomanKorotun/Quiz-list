@@ -1,8 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container, Section } from "../GlobalStyle";
 import { useEffect } from "react";
+import { TitlePage } from "../components/common/TitlePage";
 
-const CreateQuizResult = () => {
+const CreateQuizResultPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -17,6 +18,7 @@ const CreateQuizResult = () => {
   return (
     <Section>
       <Container>
+        <TitlePage>Quiz Creation Result</TitlePage>
         {success && (
           <>
             <div>{message}</div>
@@ -43,4 +45,4 @@ const CreateQuizResult = () => {
   );
 };
 
-export default CreateQuizResult;
+export default CreateQuizResultPage;
