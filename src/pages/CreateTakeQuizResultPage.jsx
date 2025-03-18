@@ -1,9 +1,9 @@
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Container, Section } from "../GlobalStyle";
-import { useEffect } from "react";
 import { TitlePage } from "../components/common/TitlePage";
 
-const CreateQuizResultPage = () => {
+const CreateTakeQuizResultPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -11,21 +11,20 @@ const CreateQuizResultPage = () => {
 
   useEffect(() => {
     if (!success && !error) {
-      navigate("/create-quiz");
+      navigate("/quizzes");
     }
   }, [success, error, navigate]);
 
   return (
     <Section>
       <Container>
-        {(success || error) && <TitlePage>Quiz Creation Result</TitlePage>}
+        {(success || error) && <TitlePage>Take Quiz Creation Result</TitlePage>}
         {success && (
           <>
             <div>{message}</div>
             <div>
               You can go to the&nbsp;
-              <Link to="/quizzes">page of all quizzes</Link> or&nbsp;
-              <Link to="/create-quiz">create a new quiz!</Link>
+              <Link to="/quizzes">page of all quizzes</Link>
             </div>
           </>
         )}
@@ -33,10 +32,8 @@ const CreateQuizResultPage = () => {
           <>
             <div>{message}...</div>
             <div>
-              You can try&nbsp;
-              <Link to="/create-quiz">create a new quiz again</Link> or go to
-              the&nbsp;
-              <Link to="/quizzes">page of all quizzes!</Link>
+              You can go to the&nbsp;
+              <Link to="/quizzes">page of all quizzes</Link>
             </div>
           </>
         )}
@@ -45,4 +42,4 @@ const CreateQuizResultPage = () => {
   );
 };
 
-export default CreateQuizResultPage;
+export default CreateTakeQuizResultPage;

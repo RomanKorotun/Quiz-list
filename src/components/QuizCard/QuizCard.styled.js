@@ -12,11 +12,17 @@ export const Name = styled.div`
 `;
 
 export const Description = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 50px;
   font-size: 13px;
 `;
 
 export const Questions = styled.div`
+  font-size: 13px;
+  color: #3f75bc;
+  margin-bottom: 10px;
+`;
+
+export const SubmissionsCount = styled.div`
   font-size: 13px;
   color: #3f75bc;
 `;

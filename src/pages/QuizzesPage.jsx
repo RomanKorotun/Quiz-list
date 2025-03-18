@@ -34,7 +34,7 @@ const QuizzesPage = () => {
   return (
     <Section>
       <Container>
-        <TitlePage>Update Quiz</TitlePage>
+        <TitlePage>Quizzes</TitlePage>
         {quizList?.length > 0 && (
           <QuizList quizList={quizList} quizDelete={quizDelete} />
         )}

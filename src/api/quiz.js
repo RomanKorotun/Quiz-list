@@ -21,3 +21,7 @@ export const deleteQuiz = async (id) => {
 export const updateQuiz = async (id, quiz) => {
   return await axios.put(`/quizzes/${id}`, quiz);
 };
+
+export const addTakeQuiz = async (takeQuiz) => {
+  return await axios.post("/take-quizzes", takeQuiz);
+};
