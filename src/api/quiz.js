@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://quiz-list-backend.onrender.com";
+axios.defaults.baseURL = "https://quiz-list-backend.onrender.com/api";
 
 export const addQuiz = async (quiz) => {
   return await axios.post("/quizzes", quiz);
