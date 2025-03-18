@@ -1,1 +1,0 @@
-import{j as r,S as e,C as t}from"./index-Bihbs_Y8.js";import{T as i}from"./TitlePage-D6sy-MF6.js";import{C as o}from"./CreateQuizForm-BevAerrA.js";import"./formik.esm-mD6VPJ1y.js";import"./quiz-DrvXodiZ.js";const x=()=>r.jsx(e,{children:r.jsxs(t,{children:[r.jsx(i,{children:"Create Quiz"}),r.jsx(o,{})]})});export{x as default};
