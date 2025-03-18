@@ -32,10 +32,14 @@ export const QuizCard = ({ quiz, quizDelete }) => {
 
   return (
     <CardWrapper>
-      <Name>{quiz.name}</Name>
-      <Description>{quiz.description}</Description>
-      <Questions>Questions: {quiz.questionsCount}</Questions>
-      <SubmissionsCount>Number of submissions: {quiz.count}</SubmissionsCount>
+      <div>
+        <Name>{quiz.name}</Name>
+        <Description>{quiz.description}</Description>
+      </div>
+      <div>
+        <Questions>Questions: {quiz.questionsCount}</Questions>
+        <SubmissionsCount>Number of submissions: {quiz.count}</SubmissionsCount>
+      </div>
       <OptionsButton
         onClick={() => setIsOptionsVisible((prevState) => !prevState)}
       >

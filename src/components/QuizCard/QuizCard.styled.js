@@ -1,9 +1,16 @@
 import styled from "styled-components";
 
 export const CardWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
   border: 1px solid #dee2df;
-  padding: 10px;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  height: 100%;
 `;
 
 export const Name = styled.div`
@@ -12,7 +19,7 @@ export const Name = styled.div`
 `;
 
 export const Description = styled.div`
-  margin-bottom: 50px;
+  /* margin-bottom: 50px; */
   font-size: 13px;
 `;
 
@@ -28,12 +35,13 @@ export const SubmissionsCount = styled.div`
 `;
 
 export const OptionsButton = styled.button`
+  padding: 0;
   border: none;
   background-color: transparent;
   cursor: pointer;
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 6px;
 `;
 
 export const OptionsList = styled.div`

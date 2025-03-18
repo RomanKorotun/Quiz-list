@@ -9,4 +9,5 @@ export const List = styled.ul`
 
 export const Item = styled.li`
   flex-basis: calc((100% - 30px * 2) / 3);
+  min-height: 170px;
 `;
