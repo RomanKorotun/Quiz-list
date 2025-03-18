@@ -1,4 +1,4 @@
-import{d,r as c,u as g,j as t,b as f,S as j,C as v}from"./index-DNJJHnKt.js";import{a as y}from"./quiz-DrvXodiZ.js";import{T as S}from"./TitlePage-Dw6_r2P_.js";import{c as $,F as b,a as I}from"./formik.esm-L-d8N29t.js";const T=d.h3`
+import{d,r as c,u as g,j as t,b as f,S as j,C as v}from"./index-Bihbs_Y8.js";import{a as y}from"./quiz-DrvXodiZ.js";import{T as S}from"./TitlePage-D6sy-MF6.js";import{c as $,F as b,a as I}from"./formik.esm-mD6VPJ1y.js";const T=d.h3`
   margin-bottom: 20px;
 `,F=d.div`
   margin-bottom: 20px;
