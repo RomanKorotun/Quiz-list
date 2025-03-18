@@ -1,5 +1,5 @@
 import { lazy } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./Layout";
 
 const QuizzesPage = lazy(() => import("./pages/QuizzesPage"));
@@ -16,6 +16,7 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
+        <Route index element={<Navigate to="/quizzes" />} />
         <Route path="quizzes" element={<QuizzesPage />} />
         <Route path="create-quiz" element={<CreateQuizPage />} />
         <Route path="create-quiz-result" element={<CreateQuizResultPage />} />
