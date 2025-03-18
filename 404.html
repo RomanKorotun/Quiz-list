@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>404 Not Found</title>
     <script>
-      if (window.location.pathname !== "/") {
-        window.location.replace(`/Quiz-list${window.location.pathname}`);
+      console.log("Current path:", window.location.pathname);
+      const path = window.location.pathname;
+      if (path !== "/" && path !== "/index.html") {
+        console.log("Redirecting to:", `/Quiz-list${path}`);
+        window.location.replace(`/Quiz-list${path}`);
       }
     </script>
   </head>
