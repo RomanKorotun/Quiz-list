@@ -1,4 +1,4 @@
-import{d as a,r as l,u as F,j as e,b as $,S as N,C as Q}from"./index-mwKOVFtY.js";import{a as q}from"./quiz-4uUA3HIg.js";import{T as z}from"./TitlePage-CAOL2aQT.js";import{a as B,c as v,F as E}from"./formik.esm-DmfdAwly.js";const I=a(B)`
+import{d as a,r as l,u as F,j as e,b as $,S as N,C as Q}from"./index-CE9iKPMi.js";import{a as q}from"./quiz-4uUA3HIg.js";import{T as z}from"./TitlePage-DJ3KaeMw.js";import{a as B,c as v,F as E}from"./formik.esm-CEQXTqWJ.js";const I=a(B)`
   min-height: 200px;
 `,M=a(v)`
   max-width: 200px;
