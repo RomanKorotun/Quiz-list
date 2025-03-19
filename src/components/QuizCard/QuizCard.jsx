@@ -17,8 +17,12 @@ export const QuizCard = ({ quiz, quizDelete }) => {
 
   const navigate = useNavigate();
 
+  // const handleClickRun = (id) => {
+  //   navigate(`/take-quiz/${id}`);
+  // };
+
   const handleClickRun = (id) => {
-    navigate(`/take-quiz/${id}`);
+    navigate(`/create-take-quiz/${id}`);
   };
 
   const handleClickUpdate = (id) => {
