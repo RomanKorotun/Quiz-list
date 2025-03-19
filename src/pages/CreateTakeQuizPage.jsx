@@ -19,7 +19,7 @@ export const Time = styled.div`
   margin-bottom: 30px;
 `;
 
-const CreateTakeQuizPageNew = () => {
+const CreateTakeQuizPage = () => {
   const { id } = useParams();
   const [quiz, setQuiz] = useState(null);
 
@@ -97,4 +97,4 @@ const CreateTakeQuizPageNew = () => {
   );
 };
 
-export default CreateTakeQuizPageNew;
+export default CreateTakeQuizPage;

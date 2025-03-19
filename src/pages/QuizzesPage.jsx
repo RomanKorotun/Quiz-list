@@ -4,6 +4,7 @@ import { deleteQuiz, getAllQuizzes } from "../api/quiz";
 import { QuizList } from "../components/QuizList/QuizList";
 import { Link } from "react-router-dom";
 import { TitlePage } from "../components/common/TitlePage";
+import { Loader } from "../components/Loader/Loader";
 
 const QuizzesPage = () => {
   const [quizList, setQuizList] = useState(null);
@@ -34,6 +35,7 @@ const QuizzesPage = () => {
   return (
     <Section>
       <Container>
+        {!quizList && <Loader />}
         {quizList && <TitlePage>Quizzes</TitlePage>}
         {quizList?.length > 0 && (
           <QuizList quizList={quizList} quizDelete={quizDelete} />

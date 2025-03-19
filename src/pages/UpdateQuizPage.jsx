@@ -4,6 +4,7 @@ import { CreateQuizForm } from "../components/CreateQuizForm/CreateQuizForm";
 import { useEffect, useState } from "react";
 import { getByIdQuiz } from "../api/quiz";
 import { TitlePage } from "../components/common/TitlePage";
+import { Loader } from "../components/Loader/Loader";
 
 const UpdateQuizPage = () => {
   const { id } = useParams();
@@ -25,6 +26,7 @@ const UpdateQuizPage = () => {
   return (
     <Section>
       <Container>
+        {!quiz && <Loader />}
         {quiz && (
           <>
             <TitlePage>Update Quiz</TitlePage>

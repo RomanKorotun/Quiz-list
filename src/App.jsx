@@ -6,9 +6,7 @@ const QuizzesPage = lazy(() => import("./pages/QuizzesPage"));
 const CreateQuizPage = lazy(() => import("./pages/CreateQuizPage"));
 const CreateQuizResultPage = lazy(() => import("./pages/CreateQuizResultPage"));
 const UpdateQuizPage = lazy(() => import("./pages/UpdateQuizPage"));
-const CreateTakeQuizPageNew = lazy(() =>
-  import("./pages/CreateTakeQuizPageNew")
-);
+const CreateTakeQuizPage = lazy(() => import("./pages/CreateTakeQuizPage"));
 const PreviewTakeQuizPage = lazy(() => import("./pages/PreviewTakeQuizPage"));
 const CreateTakeQuizResultPage = lazy(() =>
   import("./pages/CreateTakeQuizResultPage")
@@ -23,10 +21,7 @@ const App = () => {
         <Route path="create-quiz" element={<CreateQuizPage />} />
         <Route path="create-quiz-result" element={<CreateQuizResultPage />} />
         <Route path="update-quiz/:id" element={<UpdateQuizPage />} />
-        <Route
-          path="create-take-quiz/:id"
-          element={<CreateTakeQuizPageNew />}
-        />
+        <Route path="create-take-quiz/:id" element={<CreateTakeQuizPage />} />
         <Route path="preview-take-quiz" element={<PreviewTakeQuizPage />} />
         <Route
           path="create-take-quiz-result"

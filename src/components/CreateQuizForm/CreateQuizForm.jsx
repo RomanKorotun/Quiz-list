@@ -17,8 +17,12 @@ import { ChoiceInput } from "../Inputs/ChoiceInput/ChoiceInput";
 import { CreateQuizSchema } from "../../validation/quizzes/createQuizValidation";
 import { addQuiz, updateQuiz } from "../../api/quiz";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Loader } from "../Loader/Loader";
 
 export const CreateQuizForm = ({ quiz }) => {
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleTypeChange = (e, questionIndex, setFieldValue, setFieldError) => {
@@ -64,6 +68,7 @@ export const CreateQuizForm = ({ quiz }) => {
   };
 
   const onSubmit = async (values) => {
+    setLoading(true);
     if (!quiz) {
       try {
         await addQuiz(values);
@@ -115,141 +120,144 @@ export const CreateQuizForm = ({ quiz }) => {
       onSubmit={async (values) => onSubmit(values)}
     >
       {({ values, setFieldValue, errors, setFieldError }) => (
-        <Form>
-          <NameInput
-            handleNameChange={(e) => {
-              setFieldValue("name", e.target.value);
-              setFieldError("name", undefined);
-            }}
-            name={values.name}
-            error={errors.name}
-          />
+        <>
+          {loading && <Loader />}
+          <Form>
+            <NameInput
+              handleNameChange={(e) => {
+                setFieldValue("name", e.target.value);
+                setFieldError("name", undefined);
+              }}
+              name={values.name}
+              error={errors.name}
+            />
 
-          <DescriptionInput
-            handleDescChange={(e) => {
-              setFieldValue("description", e.target.value);
-              setFieldError("description", undefined);
-            }}
-            error={errors.description}
-            description={values.description}
-          />
+            <DescriptionInput
+              handleDescChange={(e) => {
+                setFieldValue("description", e.target.value);
+                setFieldError("description", undefined);
+              }}
+              error={errors.description}
+              description={values.description}
+            />
 
-          <FieldArray
-            name="questions"
-            render={(arrayHelpers) => (
-              <>
-                {values.questions.map((questionItem, questionIndex) => (
-                  <QuestionGroup key={questionIndex}>
-                    <Wrapper>
-                      <QuestionInput
-                        questionIndex={questionIndex}
-                        question={questionItem.question}
-                        handleQuestionChange={(e) => {
-                          const question = `questions[${questionIndex}].question`;
-                          setFieldValue(question, e.target.value);
-                          setFieldError(question, undefined);
-                        }}
-                        error={errors.questions?.[questionIndex]?.question}
-                      />
+            <FieldArray
+              name="questions"
+              render={(arrayHelpers) => (
+                <>
+                  {values.questions.map((questionItem, questionIndex) => (
+                    <QuestionGroup key={questionIndex}>
+                      <Wrapper>
+                        <QuestionInput
+                          questionIndex={questionIndex}
+                          question={questionItem.question}
+                          handleQuestionChange={(e) => {
+                            const question = `questions[${questionIndex}].question`;
+                            setFieldValue(question, e.target.value);
+                            setFieldError(question, undefined);
+                          }}
+                          error={errors.questions?.[questionIndex]?.question}
+                        />
 
-                      <TypeInput
-                        questionIndex={questionIndex}
-                        type={questionItem.type}
-                        handleTypeChange={(e) => {
-                          handleTypeChange(
-                            e,
-                            questionIndex,
-                            setFieldValue,
-                            setFieldError
-                          );
-                        }}
-                      />
-
-                      <RemoveButton
-                        type="button"
-                        onClick={() => {
-                          if (values.questions.length > 1) {
-                            arrayHelpers.remove(questionIndex);
-                          }
-                        }}
-                      >
-                        Remove Question
-                      </RemoveButton>
-                    </Wrapper>
-
-                    {(questionItem.type === "Single choice" ||
-                      questionItem.type === "Multiple choices") && (
-                      <AnswersGroup>
-                        {questionItem.answers.length > 0 && (
-                          <TitleAnswers> Answers</TitleAnswers>
-                        )}
-                        {questionItem.answers.map((answer, answerIndex) => (
-                          <ChoiceWrapper
-                            key={`${questionIndex}-${answerIndex}`}
-                          >
-                            <ChoiceInput
-                              answer={answer}
-                              answerIndex={answerIndex}
-                              questionIndex={questionIndex}
-                              handleChoiceChange={(e) => {
-                                const choice = `questions[${questionIndex}].answers[${answerIndex}]`;
-                                setFieldValue(choice, e.target.value);
-                                setFieldError(choice, undefined);
-                              }}
-                              error={
-                                errors?.questions?.[questionIndex]?.answers?.[
-                                  answerIndex
-                                ]
-                              }
-                            />
-
-                            <RemoveButton
-                              type="button"
-                              onClick={() =>
-                                handleAnswerRemove(
-                                  questionItem,
-                                  questionIndex,
-                                  answerIndex,
-                                  setFieldValue
-                                )
-                              }
-                            >
-                              Remove Answer
-                            </RemoveButton>
-                          </ChoiceWrapper>
-                        ))}
-
-                        <AddButton
-                          type="button"
-                          onClick={() =>
-                            handleChoiceAdd(
-                              questionItem,
+                        <TypeInput
+                          questionIndex={questionIndex}
+                          type={questionItem.type}
+                          handleTypeChange={(e) => {
+                            handleTypeChange(
+                              e,
                               questionIndex,
-                              setFieldValue
-                            )
-                          }
+                              setFieldValue,
+                              setFieldError
+                            );
+                          }}
+                        />
+
+                        <RemoveButton
+                          type="button"
+                          onClick={() => {
+                            if (values.questions.length > 1) {
+                              arrayHelpers.remove(questionIndex);
+                            }
+                          }}
                         >
-                          Add Choice
-                        </AddButton>
-                      </AnswersGroup>
-                    )}
-                  </QuestionGroup>
-                ))}
+                          Remove Question
+                        </RemoveButton>
+                      </Wrapper>
 
-                <AddButton
-                  type="button"
-                  onClick={() => handleQuestionAdd(arrayHelpers)}
-                >
-                  Add Question
-                </AddButton>
-              </>
-            )}
-          />
+                      {(questionItem.type === "Single choice" ||
+                        questionItem.type === "Multiple choices") && (
+                        <AnswersGroup>
+                          {questionItem.answers.length > 0 && (
+                            <TitleAnswers> Answers</TitleAnswers>
+                          )}
+                          {questionItem.answers.map((answer, answerIndex) => (
+                            <ChoiceWrapper
+                              key={`${questionIndex}-${answerIndex}`}
+                            >
+                              <ChoiceInput
+                                answer={answer}
+                                answerIndex={answerIndex}
+                                questionIndex={questionIndex}
+                                handleChoiceChange={(e) => {
+                                  const choice = `questions[${questionIndex}].answers[${answerIndex}]`;
+                                  setFieldValue(choice, e.target.value);
+                                  setFieldError(choice, undefined);
+                                }}
+                                error={
+                                  errors?.questions?.[questionIndex]?.answers?.[
+                                    answerIndex
+                                  ]
+                                }
+                              />
 
-          <SubmitButton type="submit">
-            {!quiz ? "Create Quiz" : "Update Quiz"}
-          </SubmitButton>
-        </Form>
+                              <RemoveButton
+                                type="button"
+                                onClick={() =>
+                                  handleAnswerRemove(
+                                    questionItem,
+                                    questionIndex,
+                                    answerIndex,
+                                    setFieldValue
+                                  )
+                                }
+                              >
+                                Remove Answer
+                              </RemoveButton>
+                            </ChoiceWrapper>
+                          ))}
+
+                          <AddButton
+                            type="button"
+                            onClick={() =>
+                              handleChoiceAdd(
+                                questionItem,
+                                questionIndex,
+                                setFieldValue
+                              )
+                            }
+                          >
+                            Add Choice
+                          </AddButton>
+                        </AnswersGroup>
+                      )}
+                    </QuestionGroup>
+                  ))}
+
+                  <AddButton
+                    type="button"
+                    onClick={() => handleQuestionAdd(arrayHelpers)}
+                  >
+                    Add Question
+                  </AddButton>
+                </>
+              )}
+            />
+
+            <SubmitButton type="submit">
+              {!quiz ? "Create Quiz" : "Update Quiz"}
+            </SubmitButton>
+          </Form>
+        </>
       )}
     </Formik>
   );
