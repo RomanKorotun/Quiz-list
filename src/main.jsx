@@ -6,7 +6,7 @@ import { GlobalStyle } from "./GlobalStyle.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter basename="/Quiz-list/quizzes">
+    <BrowserRouter basename="/Quiz-list">
       <GlobalStyle />
       <App />
     </BrowserRouter>
