@@ -23,7 +23,6 @@ const handleInitialTime = () => {
 
 const handleInitialOwner = () => {
   const owner = localStorage.getItem("quizId");
-  console.log("owner", owner);
   if (owner) {
     return JSON.parse(owner);
   } else {
@@ -43,8 +42,6 @@ const PreviewTakeQuizPage = () => {
       localStorage.removeItem("take-quiz-duration");
     };
   }, []);
-
-  console.log("PreviewTakeQuizPage ");
 
   return (
     <Section>

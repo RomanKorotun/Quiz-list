@@ -19,7 +19,6 @@ export const Name = styled.div`
 `;
 
 export const Description = styled.div`
-  /* margin-bottom: 50px; */
   font-size: 13px;
 `;
 

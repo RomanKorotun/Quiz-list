@@ -27,7 +27,6 @@ const CreateTakeQuizPageNew = () => {
   const [question, setQuestion] = useState();
 
   const [timer, setTimer] = useState(0);
-  // const [intervalId, setIntervalId] = useState(null);
 
   useEffect(() => {
     const func = async () => {
@@ -60,7 +59,6 @@ const CreateTakeQuizPageNew = () => {
     const id = setInterval(() => {
       setTimer((prevState) => prevState + 1);
     }, 1000);
-    // setIntervalId(id);
     return () => {
       clearInterval(id);
     };
