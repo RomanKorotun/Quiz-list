@@ -1,4 +1,4 @@
-import{d as s,u as h,j as e,r as a,S as p,C as x}from"./index-BfY3Aw2M.js";import{T as g}from"./TitlePage-C1yB1Wq_.js";import{c as j}from"./quiz-4uUA3HIg.js";const k=s.ul`
+import{d as s,u as h,j as e,r as a,S as p,C as x}from"./index-DXT-cwkx.js";import{T as g}from"./TitlePage-u0MNtKVV.js";import{c as j}from"./quiz-4uUA3HIg.js";const k=s.ul`
   margin-bottom: 30px;
 `,z=s.li`
   &:not(:last-child) {
