@@ -47,7 +47,7 @@ export const TakeQuizQuestion = ({
       case "Single choice":
         return questionItem.answers.map((answer, answerIndex) => (
           <div key={answerIndex}>
-            <Field
+            <CustomField
               type="radio"
               name={fieldName}
               value={answer}
@@ -60,7 +60,7 @@ export const TakeQuizQuestion = ({
       case "Multiple choices":
         return questionItem.answers.map((answer, answerIndex) => (
           <div key={answerIndex}>
-            <Field
+            <CustomField
               type="checkbox"
               name={fieldName}
               value={answer}
@@ -100,7 +100,7 @@ export const TakeQuizQuestion = ({
         <CustomForm>
           <Label>
             <h4>
-              {currentIndex + 1} {questionItem.question}
+              {currentIndex + 1}. {questionItem.question}
             </h4>
             {renderQuestionField(questionItem, values)}
             {error && <Error>One or more fields are empty!</Error>}

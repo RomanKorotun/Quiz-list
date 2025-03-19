@@ -6,6 +6,7 @@ export const CustomForm = styled(Form)`
 `;
 
 export const CustomField = styled(Field)`
+  margin-right: 5px;
   max-width: 200px;
 `;
 
